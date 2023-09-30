@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c4nyunsu7oe3p"]
 
-[ext_resource type="PackedScene" uid="uid://baqew7fxrxns" path="res://player.tscn" id="1_7uk5b"]
+[ext_resource type="PackedScene" uid="uid://bypxi1ltyioh6" path="res://scenes/fp_player.tscn" id="1_isbqj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vf1d5"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -16,17 +16,19 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_34edg"]
-size = Vector2(10, 10)
+size = Vector2(20, 20)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_e7yh3"]
-data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j71ia"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
 [node name="RootNode" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = SubResource("Environment_phwdj")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 light_color = Color(1, 1, 0.741176, 1)
 shadow_enabled = true
@@ -37,8 +39,7 @@ mesh = SubResource("PlaneMesh_34edg")
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_e7yh3")
+shape = SubResource("ConcavePolygonShape3D_j71ia")
 
-[node name="Player" parent="." instance=ExtResource("1_7uk5b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-linear_damp = 3.0
+[node name="fp_player" parent="." instance=ExtResource("1_isbqj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
