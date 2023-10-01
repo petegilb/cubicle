@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://fe76834oblku"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_o5eat"]
+[ext_resource type="Texture2D" uid="uid://dgdu4cjr5i0cu" path="res://assets/pixel_dot.png" id="2_5tn6e"]
+
+[node name="UI" type="CanvasLayer"]
+follow_viewport_enabled = true
+script = ExtResource("1_o5eat")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/VBoxContainer/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("2_5tn6e")
+stretch_mode = 3
+
+[node name="InteractPrompt" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "test text"
+horizontal_alignment = 1

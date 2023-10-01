@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4nyunsu7oe3p"]
+[gd_scene load_steps=12 format=3 uid="uid://c4nyunsu7oe3p"]
 
-[ext_resource type="PackedScene" uid="uid://bypxi1ltyioh6" path="res://scenes/fp_player.tscn" id="1_isbqj"]
+[ext_resource type="Script" path="res://scripts/Interactables/InteractableCube.gd" id="2_3a5o7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vf1d5"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -26,7 +26,15 @@ data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0,
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sevms"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[node name="RootNode" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_fgt2o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chbkx"]
+albedo_color = Color(1, 0.556863, 1, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_wmdpq"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="CubicleMap" type="Node3D"]
 
 [node name="Environment" type="Node3D" parent="."]
 
@@ -46,9 +54,6 @@ mesh = SubResource("PlaneMesh_34edg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_j71ia")
 
-[node name="fp_player" parent="." instance=ExtResource("1_isbqj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="Cube" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.19096, 0, 0, 0, 1, 0, 0, 0, 10.3395, -9.64938, 1.92896, 0)
 mesh = SubResource("BoxMesh_xdq2n")
@@ -57,3 +62,14 @@ mesh = SubResource("BoxMesh_xdq2n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_sevms")
+
+[node name="InteractableCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51536, 0.661328, 7.19242)
+mesh = SubResource("BoxMesh_fgt2o")
+surface_material_override/0 = SubResource("StandardMaterial3D_chbkx")
+script = ExtResource("2_3a5o7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="InteractableCube"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCube/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_wmdpq")

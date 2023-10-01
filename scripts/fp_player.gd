@@ -16,10 +16,15 @@ var direction = Vector3.ZERO
 
 var is_crouched = false
 
+var interacting_obj = null
+
+signal interact_prompt_changed(new_value: String)
+
 @onready var cam_pivot = $CamPivot
 @onready var collider = $Main_Collider
 @onready var crouch_raycast = $CrouchRaycast
 @onready var crouch_collider = $Crouch_Collider
+@onready var interact_raycast = $CamPivot/Camera/InteractRaycast
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -68,10 +73,22 @@ func _physics_process(delta):
 func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	# Check for interactables
+	if interact_raycast.is_colliding() and interact_raycast.get_collider().get_parent() is Interactable:
+		if interact_raycast.get_collider().get_parent() != interacting_obj:	
+			interacting_obj = interact_raycast.get_collider().get_parent()
+			interact_prompt_changed.emit(interacting_obj.get_prompt())
+	else:
+		interacting_obj = null
+		interact_prompt_changed.emit('')
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		cam_pivot.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
 		cam_pivot.rotation.x = clamp(cam_pivot.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+		
+	if Input.is_action_just_pressed("action_interact") and interacting_obj:
+		interacting_obj.interact(func (response: String): print(response))
 
