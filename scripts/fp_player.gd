@@ -2,15 +2,24 @@ extends CharacterBody3D
 
 const WALK_SPEED = 5.0
 const SPRINT_MODIFIER = 1.3
-const CROUCH_MODIFIER = .7
+const CROUCH_MODIFIER = .45
 const JUMP_VELOCITY = 4.5
+const CAMPIVOT_HEIGHT = .5
+const CROUCH_DEPTH = -.5
 
 var current_speed = 0.0
 var mouse_sensitivity = .15
+var lerp_speed = 10.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var direction = Vector3.ZERO
+
+var is_crouched = false
 
 @onready var cam_pivot = $CamPivot
+@onready var collider = $Main_Collider
+@onready var crouch_raycast = $CrouchRaycast
+@onready var crouch_collider = $Crouch_Collider
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -27,13 +36,26 @@ func _physics_process(delta):
 	# Determine the character's speed
 	current_speed = WALK_SPEED
 	if Input.is_action_pressed("action_crouch"):
-		current_speed = WALK_SPEED * CROUCH_MODIFIER;
-	elif Input.is_action_pressed("action_sprint"):
+		is_crouched = true
+	elif Input.is_action_pressed("action_sprint") and not is_crouched:
 		current_speed = WALK_SPEED * SPRINT_MODIFIER;
 
+	# if the player is crouched, adjust camera and capsule collision
+	if is_crouched:
+		if !crouch_raycast.is_colliding():
+			is_crouched = false
+		current_speed = WALK_SPEED * CROUCH_MODIFIER;
+		cam_pivot.position.y = lerp(cam_pivot.position.y, CAMPIVOT_HEIGHT + CROUCH_DEPTH, delta*lerp_speed)
+		collider.disabled = true
+		crouch_collider.disabled = false
+	else:
+		collider.disabled = false
+		crouch_collider.disabled = true
+		cam_pivot.position.y = lerp(cam_pivot.position.y, CAMPIVOT_HEIGHT, delta*lerp_speed)
+	
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	direction = lerp(direction, (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized(), delta*lerp_speed)
 	if direction:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed

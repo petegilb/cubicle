@@ -1,16 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://bypxi1ltyioh6"]
+[gd_scene load_steps=4 format=3 uid="uid://bypxi1ltyioh6"]
 
 [ext_resource type="Script" path="res://scripts/fp_player.gd" id="1_0y1so"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5fbem"]
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vl73n"]
+height = 1.4
+
 [node name="fp_player" type="CharacterBody3D"]
 script = ExtResource("1_0y1so")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Main_Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_5fbem")
+
+[node name="Crouch_Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+shape = SubResource("CapsuleShape3D_vl73n")
 
 [node name="CamPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera" type="Camera3D" parent="CamPivot"]
+
+[node name="CrouchRaycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+target_position = Vector3(0, 2, 0)
