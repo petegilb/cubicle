@@ -15,12 +15,11 @@ var daily_tasks = []
 signal day_clock_updated(new_time)
 signal approval_updated(new_value)
 signal on_screen_notification(text)
+signal update_task_list(task_list)
 
 func _ready():
 	# Temporary limit to 60 fps to stop physics jitter
 	Engine.max_fps = 60
-	for task in daily_tasks_node.get_children():
-		daily_tasks.append(task)
 	start_game()
 
 func _process(_delta):
@@ -32,6 +31,9 @@ func start_game():
 	day_timer.start()
 	second_timer.start()
 	on_screen_notification.emit('Welcome to work! Try not to get Fired!')
+	for task in daily_tasks_node.get_children():
+		daily_tasks.append(task)
+	update_task_list.emit(daily_tasks)
 	update_approval(0)
 
 func _on_day_timer_timeout():
@@ -50,12 +52,8 @@ func _on_second_timer_timeout():
 	
 	# Check for missed tasks
 	for task in daily_tasks:
-		# print('%d, %d, %d' % [task.deadline_in_seconds, 17*60 - day_timer.time_left, approval_rating])
 		if task.deadline_in_seconds > 0 and task.deadline_in_seconds < 17*60 - day_timer.time_left:
-			update_approval(task.approval_change)
-			daily_tasks.erase(task)
-			on_screen_notification.emit('failed task of type %s' % task.get_name())
-			print('failed task of type %s' % task.get_name())
+			fail_task(task)
 
 func get_clock_time():
 	# Assuming each second will act as a "minute"
@@ -85,3 +83,33 @@ func game_over():
 	on_screen_notification.emit('Restarting game...')
 	await get_tree().create_timer(3).timeout
 	print(get_tree().reload_current_scene())
+
+func fail_task(task):
+	update_approval(task.approval_change)
+	daily_tasks.erase(task)
+	on_screen_notification.emit('Failed task: %s' % task.get_name())
+	print('failed task of type %s' % task.get_name())
+	update_task_list.emit(daily_tasks)
+	
+func complete_task(task):
+	daily_tasks.erase(task)
+	on_screen_notification.emit('Completed task: %s' % task.get_name())
+	print('completed task of type %s' % task.get_name())
+	update_task_list.emit(daily_tasks)
+
+func complete_task_type(type):
+	for task in daily_tasks:
+		if is_instance_of(task, type):
+			if task.deadline_leeway < 0:
+				complete_task(task)
+				return
+			elif get_current_time() > task.deadline_in_seconds - task.deadline_leeway:
+				complete_task(task)
+				return
+	on_screen_notification.emit("You don't have a task to do here right now!")
+
+func get_current_time():
+	return 17*60 - day_timer.time_left
+	
+func send_notification(text):
+	on_screen_notification.emit(text)

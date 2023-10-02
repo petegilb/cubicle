@@ -43,4 +43,6 @@ func _on_cubicle_game_on_screen_notification(text, duration=3):
 	var tween = get_tree().create_tween()
 	tween.tween_property(notification_label, "modulate:a", 1, 1)
 	tween.tween_callback(func(): await get_tree().create_timer(duration).timeout; var fade_out_tween = get_tree().create_tween(); fade_out_tween.tween_property(notification_label, "modulate:a", 0, 1))
-	
+
+func _on_cubicle_game_update_task_list(task_list):
+	tasks.update_tasks(task_list)

@@ -1,20 +1,13 @@
 extends ItemList
 
 var data = [];
-
 var time = 0;
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	time += 1;
+	time += 50*delta;
 	if (time > 250):
-		self.add_item("you got another email bitch!")
+		self.add_item("you got another email!")
 		time = 0
-	
-	
