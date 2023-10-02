@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbqcaelekbdfk"]
+
+[ext_resource type="PackedScene" uid="uid://bygmnf6ddp7c2" path="res://assets/cubicle_map.glb" id="1_6v7nf"]
+
+[node name="cubicle_map" instance=ExtResource("1_6v7nf")]

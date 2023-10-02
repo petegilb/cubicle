@@ -1,15 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfyvc2o6x370e"]
+[gd_scene load_steps=5 format=3 uid="uid://dfyvc2o6x370e"]
 
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_3gw8r"]
 [ext_resource type="PackedScene" uid="uid://c4nyunsu7oe3p" path="res://scenes/cubicle.tscn" id="1_iimd0"]
 [ext_resource type="PackedScene" uid="uid://bypxi1ltyioh6" path="res://scenes/fp_player.tscn" id="2_rx6hw"]
 [ext_resource type="PackedScene" uid="uid://fe76834oblku" path="res://scenes/ui.tscn" id="3_qm3aj"]
 
 [node name="CubicleGame" type="Node3D"]
+script = ExtResource("1_3gw8r")
 
 [node name="CubicleMap" parent="." instance=ExtResource("1_iimd0")]
 
 [node name="fp_player" parent="." instance=ExtResource("2_rx6hw")]
-transform = Transform3D(-0.648186, 0, -0.761482, 0, 1, 0, 0.761482, 0, -0.648186, 0, 1, 0)
+transform = Transform3D(-0.648186, 0, -0.761482, 0, 1, 0, 0.761482, 0, -0.648186, 2.58469, 1, 0.844279)
 
 [node name="UI" parent="." instance=ExtResource("3_qm3aj")]
 

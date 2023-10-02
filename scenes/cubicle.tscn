@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4nyunsu7oe3p"]
+[gd_scene load_steps=13 format=3 uid="uid://c4nyunsu7oe3p"]
 
 [ext_resource type="Script" path="res://scripts/Interactables/InteractableCube.gd" id="2_3a5o7"]
+[ext_resource type="PackedScene" uid="uid://cbqcaelekbdfk" path="res://scenes/cubicle_map_blendimport.tscn" id="2_h6b3l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vf1d5"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -47,6 +48,7 @@ light_color = Color(1, 1, 0.741176, 1)
 shadow_enabled = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("PlaneMesh_34edg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
@@ -73,3 +75,5 @@ script = ExtResource("2_3a5o7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCube/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_wmdpq")
+
+[node name="cubicle_map" parent="." instance=ExtResource("2_h6b3l")]

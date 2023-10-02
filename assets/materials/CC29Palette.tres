@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cgwuhkc25ae6n"]
+
+[ext_resource type="Texture2D" uid="uid://cnta5exnwjg6k" path="res://assets/textures/cc-29-1x.png" id="1_1x8j3"]
+
+[resource]
+resource_name = "CC29Palette"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_1x8j3")
+roughness = 0.5
+texture_filter = 2
