@@ -20,6 +20,7 @@ one_shot = true
 
 [node name="SecondTimer" type="Timer" parent="."]
 
+[connection signal="day_clock_updated" from="." to="UI" method="_on_cubicle_game_day_clock_updated"]
 [connection signal="interact_prompt_changed" from="fp_player" to="UI" method="_on_interact_prompt_changed"]
 [connection signal="timeout" from="DayTimer" to="." method="_on_day_timer_timeout"]
 [connection signal="timeout" from="SecondTimer" to="." method="_on_second_timer_timeout"]
