@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://fe76834oblku"]
+[gd_scene load_steps=6 format=3 uid="uid://fe76834oblku"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_o5eat"]
 [ext_resource type="Texture2D" uid="uid://dgdu4cjr5i0cu" path="res://assets/pixel_dot.png" id="2_5tn6e"]
 [ext_resource type="PackedScene" uid="uid://cpbeet1oa5t5v" path="res://scenes/emails.tscn" id="2_rakp0"]
 [ext_resource type="FontFile" uid="uid://dtftl3wgkycy7" path="res://assets/fonts/PixelifySans-Regular.ttf" id="3_nfyk4"]
+[ext_resource type="PackedScene" uid="uid://18ohy0wgcwgi" path="res://scenes/tasks.tscn" id="5_a6mxe"]
 
 [node name="UI" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -66,6 +67,10 @@ layout_mode = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
+[node name="Tasks" parent="Control" instance=ExtResource("5_a6mxe")]
+visible = false
+layout_mode = 1
+
 [node name="TimeMargin" type="MarginContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 1
@@ -81,3 +86,35 @@ theme_override_constants/margin_right = 30
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_nfyk4")
 theme_override_font_sizes/font_size = 40
+
+[node name="ApprovalMargin" type="MarginContainer" parent="Control"]
+layout_mode = 1
+offset_right = 155.0
+offset_bottom = 64.0
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
+
+[node name="ApprovalLabel" type="Label" parent="Control/ApprovalMargin"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_nfyk4")
+theme_override_font_sizes/font_size = 40
+
+[node name="NotificationLabel" type="Label" parent="Control"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -240.0
+offset_right = 123.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_nfyk4")
+theme_override_font_sizes/font_size = 30
+text = "You failed a task"

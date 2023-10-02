@@ -1,0 +1,118 @@
+[gd_scene load_steps=8 format=3 uid="uid://18ohy0wgcwgi"]
+
+[ext_resource type="Script" path="res://scripts/tasks.gd" id="1_8cxsy"]
+[ext_resource type="FontFile" uid="uid://dtftl3wgkycy7" path="res://assets/fonts/PixelifySans-Regular.ttf" id="1_px6i2"]
+[ext_resource type="Texture2D" uid="uid://bvapmc6lcwgmg" path="res://assets/ui/window-icon.png" id="3_nbnec"]
+[ext_resource type="Texture2D" uid="uid://cbuwmy8murrm1" path="res://assets/ui/close_smaller.png" id="4_symxa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfe16"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+bg_color = Color(0.94902, 0.941176, 0.898039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8mhr"]
+bg_color = Color(0.94902, 0.941176, 0.898039, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5khbb"]
+bg_color = Color(0.721569, 0.709804, 0.72549, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[node name="Tasks" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8cxsy")
+
+[node name="TaskWindowMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 1200
+theme_override_constants/margin_bottom = 300
+
+[node name="ColorRect" type="ColorRect" parent="TaskWindowMargin"]
+layout_mode = 2
+color = Color(1, 1, 0.905882, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="TaskWindowMargin"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TaskList" type="ItemList" parent="TaskWindowMargin/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.129412, 0.129412, 0.137255, 1)
+theme_override_colors/font_hovered_color = Color(0.537255, 1, 0.505882, 1)
+theme_override_colors/font_selected_color = Color(0, 0.788235, 0, 1)
+theme_override_constants/v_separation = 12
+theme_override_fonts/font = ExtResource("1_px6i2")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/panel = SubResource("StyleBoxFlat_dfe16")
+item_count = 1
+item_0/text = "Tasks (Press Tab to reopen)"
+item_0/selectable = false
+
+[node name="TopButtonsMargin" type="MarginContainer" parent="TaskWindowMargin/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="TopButtonHbox" type="HBoxContainer" parent="TaskWindowMargin/MarginContainer/TopButtonsMargin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Minimize" type="Button" parent="TaskWindowMargin/MarginContainer/TopButtonsMargin/TopButtonHbox"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.94902, 0, 0, 1)
+theme_override_constants/icon_max_width = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_g8mhr")
+icon = ExtResource("3_nbnec")
+icon_alignment = 1
+
+[node name="Window" type="Button" parent="TaskWindowMargin/MarginContainer/TopButtonsMargin/TopButtonHbox"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.94902, 0, 0, 1)
+theme_override_constants/icon_max_width = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_g8mhr")
+icon = ExtResource("3_nbnec")
+icon_alignment = 1
+
+[node name="Close" type="Button" parent="TaskWindowMargin/MarginContainer/TopButtonsMargin/TopButtonHbox"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.94902, 0, 0, 1)
+theme_override_constants/icon_max_width = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_5khbb")
+icon = ExtResource("4_symxa")
+icon_alignment = 1
+
+[connection signal="pressed" from="TaskWindowMargin/MarginContainer/TopButtonsMargin/TopButtonHbox/Close" to="." method="_on_close_pressed"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpbeet1oa5t5v"]
+[gd_scene load_steps=12 format=3 uid="uid://cpbeet1oa5t5v"]
 
 [ext_resource type="Script" path="res://scripts/Label.gd" id="1_lmr6w"]
 [ext_resource type="Texture2D" uid="uid://bvapmc6lcwgmg" path="res://assets/ui/window-icon.png" id="2_5x6yb"]
 [ext_resource type="FontFile" uid="uid://dtftl3wgkycy7" path="res://assets/fonts/PixelifySans-Regular.ttf" id="4_n24tx"]
 [ext_resource type="Texture2D" uid="uid://cbuwmy8murrm1" path="res://assets/ui/close_smaller.png" id="5_7edha"]
 [ext_resource type="Script" path="res://scripts/test-button.gd" id="5_nxjvp"]
+[ext_resource type="Script" path="res://scripts/CloseButton.gd" id="6_kkvwg"]
 [ext_resource type="Script" path="res://scripts/Emails.gd" id="6_u63gc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjadx"]
@@ -82,9 +83,6 @@ theme_override_fonts/font = ExtResource("4_n24tx")
 theme_override_font_sizes/font_size = 25
 text = "Inbox 0"
 script = ExtResource("1_lmr6w")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_n24tx")
-theme_override_font_sizes/font_size = 25
 
 [node name="MarginEmails" type="MarginContainer" parent="EmailWindowMargin"]
 layout_mode = 2
@@ -136,13 +134,14 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_qti0g")
 icon = ExtResource("2_5x6yb")
 icon_alignment = 1
 
-[node name="Close2" type="Button" parent="EmailWindowMargin/TopButtonsMargin/TopButtonHbox"]
+[node name="Close" type="Button" parent="EmailWindowMargin/TopButtonsMargin/TopButtonHbox"]
 layout_mode = 2
 theme_override_colors/icon_normal_color = Color(0.94902, 0, 0, 1)
 theme_override_constants/icon_max_width = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_lv5q6")
 icon = ExtResource("5_7edha")
 icon_alignment = 1
+script = ExtResource("6_kkvwg")
 
 [node name="StartButtonMargin" type="MarginContainer" parent="EmailWindowMargin"]
 layout_mode = 2
@@ -160,4 +159,5 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_kdvdq")
 text = "START"
 script = ExtResource("5_nxjvp")
 
+[connection signal="pressed" from="EmailWindowMargin/TopButtonsMargin/TopButtonHbox/Close" to="EmailWindowMargin/TopButtonsMargin/TopButtonHbox/Close" method="_on_pressed"]
 [connection signal="pressed" from="EmailWindowMargin/StartButtonMargin/StartButton" to="EmailWindowMargin/StartButtonMargin/StartButton" method="_on_pressed"]

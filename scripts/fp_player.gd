@@ -91,6 +91,13 @@ func _unhandled_input(event):
 		
 	if Input.is_action_just_pressed("action_interact") and interacting_obj:
 		interacting_obj.interact(self, func (response: String): print(response))
+	
+	if Input.is_action_just_pressed("action_open_tasks"):
+		var ui = get_ui()
+		if ui.tasks.visible:
+			ui.hide_tasks()
+		else:
+			ui.show_tasks()
 
 func get_ui():
 	if get_parent() and get_parent().has_method('get_ui'):

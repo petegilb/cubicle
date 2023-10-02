@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfyvc2o6x370e"]
+[gd_scene load_steps=7 format=3 uid="uid://dfyvc2o6x370e"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_3gw8r"]
 [ext_resource type="PackedScene" uid="uid://c4nyunsu7oe3p" path="res://scenes/cubicle.tscn" id="1_iimd0"]
 [ext_resource type="PackedScene" uid="uid://bypxi1ltyioh6" path="res://scenes/fp_player.tscn" id="2_rx6hw"]
 [ext_resource type="PackedScene" uid="uid://fe76834oblku" path="res://scenes/ui.tscn" id="3_qm3aj"]
+[ext_resource type="Script" path="res://scripts/jobtasks/task.gd" id="5_o2r5s"]
+[ext_resource type="Script" path="res://scripts/jobtasks/meeting.gd" id="6_b6r4e"]
 
 [node name="CubicleGame" type="Node3D"]
 script = ExtResource("1_3gw8r")
@@ -11,7 +13,7 @@ script = ExtResource("1_3gw8r")
 [node name="CubicleMap" parent="." instance=ExtResource("1_iimd0")]
 
 [node name="fp_player" parent="." instance=ExtResource("2_rx6hw")]
-transform = Transform3D(-0.322547, 0.000374878, 0.946554, 0.000332259, 1, -0.000282825, -0.946553, 0.000223277, -0.322547, 8.69752, 1, 8.05889)
+transform = Transform3D(-0.948102, 0.000404944, 0.317967, 0.000332259, 1, -0.000282825, -0.317966, -0.000162499, -0.948102, 9.10612, 1, 5.83911)
 
 [node name="UI" parent="." instance=ExtResource("3_qm3aj")]
 
@@ -20,7 +22,21 @@ one_shot = true
 
 [node name="SecondTimer" type="Timer" parent="."]
 
+[node name="DailyTasks" type="Node" parent="."]
+
+[node name="1pmtask" type="Node" parent="DailyTasks"]
+script = ExtResource("5_o2r5s")
+deadline_in_seconds = 780.0
+approval_change = -25
+
+[node name="1pm Meeting" type="Node" parent="DailyTasks"]
+script = ExtResource("6_b6r4e")
+deadline_in_seconds = 780.0
+approval_change = -10
+
+[connection signal="approval_updated" from="." to="UI" method="_on_cubicle_game_approval_updated"]
 [connection signal="day_clock_updated" from="." to="UI" method="_on_cubicle_game_day_clock_updated"]
+[connection signal="on_screen_notification" from="." to="UI" method="_on_cubicle_game_on_screen_notification"]
 [connection signal="interact_prompt_changed" from="fp_player" to="UI" method="_on_interact_prompt_changed"]
 [connection signal="timeout" from="DayTimer" to="." method="_on_day_timer_timeout"]
 [connection signal="timeout" from="SecondTimer" to="." method="_on_second_timer_timeout"]
