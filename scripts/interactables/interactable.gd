@@ -4,5 +4,5 @@ class_name Interactable
 func get_prompt():
 	return 'Press the interact button to interact with me!'
 
-func interact(callback: Callable):
+func interact(interactor: CharacterBody3D, callback: Callable):
 	callback.call("Successfully interacted")

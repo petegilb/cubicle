@@ -90,5 +90,9 @@ func _unhandled_input(event):
 		cam_pivot.rotation.x = clamp(cam_pivot.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 		
 	if Input.is_action_just_pressed("action_interact") and interacting_obj:
-		interacting_obj.interact(func (response: String): print(response))
+		interacting_obj.interact(self, func (response: String): print(response))
 
+func get_ui():
+	if get_parent() and get_parent().has_method('get_ui'):
+		return get_parent().get_ui()
+	return null

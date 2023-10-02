@@ -5,6 +5,7 @@ const DAY_LENGTH_IN_SECONDS = 60*8
 
 @onready var day_timer = $DayTimer
 @onready var second_timer = $SecondTimer
+@onready var ui = $UI
 
 signal day_clock_updated(new_time)
 
@@ -38,3 +39,6 @@ func get_clock_time():
 	var current_minutes = 60 - fmod(day_timer.time_left, 60)
 	var am_or_pm = "pm" if current_hour > 12 else "am"
 	return "%02d:%02d%s" % [current_hour_12, current_minutes, am_or_pm]
+
+func get_ui():
+	return ui
