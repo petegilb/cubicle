@@ -15,4 +15,11 @@ transform = Transform3D(-0.648186, 0, -0.761482, 0, 1, 0, 0.761482, 0, -0.648186
 
 [node name="UI" parent="." instance=ExtResource("3_qm3aj")]
 
+[node name="DayTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SecondTimer" type="Timer" parent="."]
+
 [connection signal="interact_prompt_changed" from="fp_player" to="UI" method="_on_interact_prompt_changed"]
+[connection signal="timeout" from="DayTimer" to="." method="_on_day_timer_timeout"]
+[connection signal="timeout" from="SecondTimer" to="." method="_on_second_timer_timeout"]
