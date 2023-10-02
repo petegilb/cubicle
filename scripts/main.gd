@@ -21,6 +21,7 @@ func start_game():
 	print('The game has begun!')
 	day_timer.wait_time = DAY_LENGTH_IN_SECONDS
 	day_timer.start()
+	second_timer.start()
 
 func _on_day_timer_timeout():
 	print('The day has ended...')
@@ -36,4 +37,4 @@ func get_clock_time():
 	var current_hour_12 = current_hour - 12 if current_hour > 12 else current_hour
 	var current_minutes = 60 - fmod(day_timer.time_left, 60)
 	var am_or_pm = "pm" if current_hour > 12 else "am"
-	print("%02d:%02d%s" % [current_hour_12, current_minutes, am_or_pm])
+	return "%02d:%02d%s" % [current_hour_12, current_minutes, am_or_pm]

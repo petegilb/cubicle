@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://fe76834oblku"]
+[gd_scene load_steps=5 format=3 uid="uid://fe76834oblku"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_o5eat"]
 [ext_resource type="Texture2D" uid="uid://dgdu4cjr5i0cu" path="res://assets/pixel_dot.png" id="2_5tn6e"]
 [ext_resource type="PackedScene" uid="uid://cpbeet1oa5t5v" path="res://scenes/emails.tscn" id="2_rakp0"]
+[ext_resource type="FontFile" uid="uid://dtftl3wgkycy7" path="res://assets/fonts/PixelifySans-Regular.ttf" id="3_nfyk4"]
 
 [node name="UI" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -21,13 +22,15 @@ mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 188.0
-offset_top = 306.0
-offset_right = -327.0
-offset_bottom = -304.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -49.5
+offset_right = 84.0
+offset_bottom = 49.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 32
@@ -52,6 +55,7 @@ stretch_mode = 3
 
 [node name="InteractPrompt" type="Label" parent="Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_nfyk4")
 theme_override_font_sizes/font_size = 20
 text = "test text"
 horizontal_alignment = 1
@@ -61,3 +65,19 @@ visible = false
 layout_mode = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
+
+[node name="TimeMargin" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -155.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 30
+
+[node name="TimeLabel" type="Label" parent="Control/TimeMargin"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_nfyk4")
+theme_override_font_sizes/font_size = 40
