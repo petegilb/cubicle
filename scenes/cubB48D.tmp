@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfyvc2o6x370e"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_3gw8r"]
+[ext_resource type="PackedScene" uid="uid://c4nyunsu7oe3p" path="res://scenes/cubicle.tscn" id="1_iimd0"]
+[ext_resource type="PackedScene" uid="uid://bypxi1ltyioh6" path="res://scenes/fp_player.tscn" id="2_rx6hw"]
+[ext_resource type="PackedScene" uid="uid://fe76834oblku" path="res://scenes/ui.tscn" id="3_qm3aj"]
+[ext_resource type="Script" path="res://scripts/jobtasks/copies.gd" id="5_btfyk"]
+[ext_resource type="Script" path="res://scripts/jobtasks/lunch.gd" id="6_2d6vd"]
+[ext_resource type="Script" path="res://scripts/jobtasks/meeting.gd" id="6_b6r4e"]
+[ext_resource type="Script" path="res://scripts/jobtasks/open_email.gd" id="7_bix55"]
+[ext_resource type="Script" path="res://scripts/jobtasks/getwater.gd" id="8_vvx4b"]
+[ext_resource type="AudioStream" uid="uid://2hk360fpkfiq" path="res://assets/sounds/Contemplation.mp3" id="9_0yuma"]
+
+[node name="CubicleGame" type="Node3D"]
+script = ExtResource("1_3gw8r")
+
+[node name="CubicleMap" parent="." instance=ExtResource("1_iimd0")]
+
+[node name="fp_player" parent="." instance=ExtResource("2_rx6hw")]
+transform = Transform3D(-0.948102, 0.000404944, 0.317967, 0.000332259, 1, -0.000282825, -0.317966, -0.000162499, -0.948102, 9.10612, 1, 5.83911)
+
+[node name="UI" parent="." instance=ExtResource("3_qm3aj")]
+
+[node name="DayTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SecondTimer" type="Timer" parent="."]
+
+[node name="DailyTasks" type="Node" parent="."]
+
+[node name="930am Meeting" type="Node" parent="DailyTasks"]
+script = ExtResource("6_b6r4e")
+deadline_in_seconds = 570.0
+approval_change = -10
+
+[node name="Make Copies" type="Node" parent="DailyTasks"]
+script = ExtResource("5_btfyk")
+approval_change = -20
+deadline_leeway = -1
+
+[node name="10am Meeting" type="Node" parent="DailyTasks"]
+script = ExtResource("6_b6r4e")
+deadline_in_seconds = 600.0
+approval_change = -10
+
+[node name="Open Emails" type="Node" parent="DailyTasks"]
+script = ExtResource("7_bix55")
+approval_change = -12
+
+[node name="Get Water" type="Node" parent="DailyTasks"]
+script = ExtResource("6_b6r4e")
+approval_change = -5
+deadline_leeway = -1
+
+[node name="Noon Lunch" type="Node" parent="DailyTasks"]
+script = ExtResource("6_2d6vd")
+deadline_in_seconds = 720.0
+approval_change = -5
+deadline_leeway = 5
+
+[node name="1pm Meeting" type="Node" parent="DailyTasks"]
+script = ExtResource("6_b6r4e")
+deadline_in_seconds = 780.0
+approval_change = -35
+
+[node name="Make Copies Again" type="Node" parent="DailyTasks"]
+script = ExtResource("5_btfyk")
+approval_change = -20
+deadline_leeway = -1
+
+[node name="Get Water Again" type="Node" parent="DailyTasks"]
+script = ExtResource("8_vvx4b")
+approval_change = -20
+deadline_leeway = -1
+
+[node name="Afternoon Snack" type="Node" parent="DailyTasks"]
+script = ExtResource("6_2d6vd")
+deadline_in_seconds = 840.0
+approval_change = -5
+deadline_leeway = 5
+
+[node name="4pm Big Meeting" type="Node" parent="DailyTasks"]
+script = ExtResource("6_b6r4e")
+deadline_in_seconds = 960.0
+approval_change = -80
+deadline_leeway = 5
+
+[node name="Open Emails Again" type="Node" parent="DailyTasks"]
+script = ExtResource("7_bix55")
+approval_change = -12
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_0yuma")
+volume_db = -11.243
+autoplay = true
+
+[connection signal="approval_updated" from="." to="UI" method="_on_cubicle_game_approval_updated"]
+[connection signal="day_clock_updated" from="." to="UI" method="_on_cubicle_game_day_clock_updated"]
+[connection signal="on_screen_notification" from="." to="UI" method="_on_cubicle_game_on_screen_notification"]
+[connection signal="update_task_list" from="." to="UI" method="_on_cubicle_game_update_task_list"]
+[connection signal="interact_prompt_changed" from="fp_player" to="UI" method="_on_interact_prompt_changed"]
+[connection signal="timeout" from="DayTimer" to="." method="_on_day_timer_timeout"]
+[connection signal="timeout" from="SecondTimer" to="." method="_on_second_timer_timeout"]

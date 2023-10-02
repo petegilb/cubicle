@@ -2,7 +2,7 @@ extends Interactable
 class_name InteractableItem
 
 @export var prompt = "to make copies"
-@export var task_type = CopiesTask
+var task_type
 
 func get_prompt():
 	return 'Press %s %s' % [InputMap.action_get_events('action_interact')[0].as_text(), prompt]
