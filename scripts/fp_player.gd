@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-const WALK_SPEED = 5.0
+const WALK_SPEED = 3.5
 const SPRINT_MODIFIER = 1.3
 const CROUCH_MODIFIER = .45
 const JUMP_VELOCITY = 4.5
@@ -25,6 +25,8 @@ signal interact_prompt_changed(new_value: String)
 @onready var crouch_raycast = $CrouchRaycast
 @onready var crouch_collider = $Crouch_Collider
 @onready var interact_raycast = $CamPivot/Camera/InteractRaycast
+@onready var footstep = $Footstep
+@onready var footstep_anim = $AnimationPlayers/FootstepAnim
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -67,7 +69,12 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
-
+	
+	if input_dir != Vector2() and is_on_floor():
+		footstep_anim.play("Footstep")
+	else:
+		footstep_anim.stop()
+	
 	move_and_slide()
 	
 func _process(_delta):
@@ -103,3 +110,7 @@ func get_ui():
 	if get_parent() and get_parent().has_method('get_ui'):
 		return get_parent().get_ui()
 	return null
+
+func play_footstep_sound():
+	footstep.pitch_scale = randf_range(.8, 1.2)
+	footstep.play()

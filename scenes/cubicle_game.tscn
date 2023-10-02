@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfyvc2o6x370e"]
+[gd_scene load_steps=10 format=3 uid="uid://dfyvc2o6x370e"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_3gw8r"]
 [ext_resource type="PackedScene" uid="uid://c4nyunsu7oe3p" path="res://scenes/cubicle.tscn" id="1_iimd0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/jobtasks/lunch.gd" id="6_2d6vd"]
 [ext_resource type="Script" path="res://scripts/jobtasks/meeting.gd" id="6_b6r4e"]
 [ext_resource type="Script" path="res://scripts/jobtasks/getwater.gd" id="8_vvx4b"]
+[ext_resource type="AudioStream" uid="uid://2hk360fpkfiq" path="res://assets/sounds/Contemplation.mp3" id="9_0yuma"]
 
 [node name="CubicleGame" type="Node3D"]
 script = ExtResource("1_3gw8r")
@@ -67,6 +68,11 @@ script = ExtResource("6_2d6vd")
 deadline_in_seconds = 840.0
 approval_change = -5
 deadline_leeway = 5
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_0yuma")
+volume_db = -11.243
+autoplay = true
 
 [connection signal="approval_updated" from="." to="UI" method="_on_cubicle_game_approval_updated"]
 [connection signal="day_clock_updated" from="." to="UI" method="_on_cubicle_game_day_clock_updated"]
