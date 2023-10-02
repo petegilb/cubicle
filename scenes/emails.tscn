@@ -1,0 +1,163 @@
+[gd_scene load_steps=11 format=3 uid="uid://cpbeet1oa5t5v"]
+
+[ext_resource type="Script" path="res://scripts/Label.gd" id="1_lmr6w"]
+[ext_resource type="Texture2D" uid="uid://bvapmc6lcwgmg" path="res://assets/ui/window-icon.png" id="2_5x6yb"]
+[ext_resource type="FontFile" uid="uid://dtftl3wgkycy7" path="res://assets/fonts/PixelifySans-Regular.ttf" id="4_n24tx"]
+[ext_resource type="Texture2D" uid="uid://cbuwmy8murrm1" path="res://assets/ui/close_smaller.png" id="5_7edha"]
+[ext_resource type="Script" path="res://scripts/test-button.gd" id="5_nxjvp"]
+[ext_resource type="Script" path="res://scripts/Emails.gd" id="6_u63gc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjadx"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+bg_color = Color(0.94902, 0.941176, 0.898039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qti0g"]
+bg_color = Color(0.94902, 0.941176, 0.898039, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lv5q6"]
+bg_color = Color(0.721569, 0.709804, 0.72549, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdvdq"]
+content_margin_left = 5.0
+content_margin_top = 3.0
+content_margin_right = 5.0
+content_margin_bottom = 3.0
+bg_color = Color(0.721569, 0.709804, 0.72549, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="Emails" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EmailWindowMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="ColorRect" type="ColorRect" parent="EmailWindowMargin"]
+layout_mode = 2
+
+[node name="MarginNumEmails" type="MarginContainer" parent="EmailWindowMargin"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 15
+
+[node name="NumEmails" type="Label" parent="EmailWindowMargin/MarginNumEmails"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_n24tx")
+theme_override_font_sizes/font_size = 25
+text = "Inbox 0"
+script = ExtResource("1_lmr6w")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_n24tx")
+theme_override_font_sizes/font_size = 25
+
+[node name="MarginEmails" type="MarginContainer" parent="EmailWindowMargin"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="ItemList" type="ItemList" parent="EmailWindowMargin/MarginEmails"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.129412, 0.129412, 0.137255, 1)
+theme_override_colors/font_hovered_color = Color(0.537255, 1, 0.505882, 1)
+theme_override_colors/font_selected_color = Color(0, 0.788235, 0, 1)
+theme_override_constants/v_separation = 12
+theme_override_fonts/font = ExtResource("4_n24tx")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/panel = SubResource("StyleBoxFlat_hjadx")
+item_count = 2
+item_0/text = "this is an item"
+item_1/text = "this is another item1"
+script = ExtResource("6_u63gc")
+
+[node name="TopButtonsMargin" type="MarginContainer" parent="EmailWindowMargin"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 65
+theme_override_constants/margin_bottom = 10
+
+[node name="TopButtonHbox" type="HBoxContainer" parent="EmailWindowMargin/TopButtonsMargin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Minimize" type="Button" parent="EmailWindowMargin/TopButtonsMargin/TopButtonHbox"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.94902, 0, 0, 1)
+theme_override_constants/icon_max_width = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_qti0g")
+icon = ExtResource("2_5x6yb")
+icon_alignment = 1
+
+[node name="Window" type="Button" parent="EmailWindowMargin/TopButtonsMargin/TopButtonHbox"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.94902, 0, 0, 1)
+theme_override_constants/icon_max_width = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_qti0g")
+icon = ExtResource("2_5x6yb")
+icon_alignment = 1
+
+[node name="Close2" type="Button" parent="EmailWindowMargin/TopButtonsMargin/TopButtonHbox"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(0.94902, 0, 0, 1)
+theme_override_constants/icon_max_width = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_lv5q6")
+icon = ExtResource("5_7edha")
+icon_alignment = 1
+
+[node name="StartButtonMargin" type="MarginContainer" parent="EmailWindowMargin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_bottom = 10
+
+[node name="StartButton" type="Button" parent="EmailWindowMargin/StartButtonMargin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_n24tx")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_kdvdq")
+text = "START"
+script = ExtResource("5_nxjvp")
+
+[connection signal="pressed" from="EmailWindowMargin/StartButtonMargin/StartButton" to="EmailWindowMargin/StartButtonMargin/StartButton" method="_on_pressed"]

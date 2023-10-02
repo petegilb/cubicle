@@ -1,27 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://fe76834oblku"]
+[gd_scene load_steps=4 format=3 uid="uid://fe76834oblku"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_o5eat"]
-[ext_resource type="Texture2D" uid="uid://balv4pknhvxh8" path="res://assets/ui/close.png" id="2_0xw04"]
-[ext_resource type="Texture2D" uid="uid://bvapmc6lcwgmg" path="res://assets/ui/window-icon.png" id="2_1gi5w"]
 [ext_resource type="Texture2D" uid="uid://dgdu4cjr5i0cu" path="res://assets/pixel_dot.png" id="2_5tn6e"]
-[ext_resource type="Script" path="res://scripts/Label.gd" id="2_7ut8k"]
-[ext_resource type="Script" path="res://scripts/test-button.gd" id="3_vmeds"]
-[ext_resource type="FontFile" uid="uid://dtftl3wgkycy7" path="res://assets/fonts/PixelifySans-Regular.ttf" id="5_gwywt"]
-[ext_resource type="Script" path="res://scripts/Emails.gd" id="7_cdu2a"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xobhb"]
-bg_color = Color(0.94902, 0.941176, 0.898039, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iv2ce"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6m64"]
-content_margin_left = 12.0
-content_margin_top = 12.0
-bg_color = Color(0.94902, 0.941176, 0.898039, 1)
+[ext_resource type="PackedScene" uid="uid://cpbeet1oa5t5v" path="res://scenes/emails.tscn" id="2_rakp0"]
 
 [node name="UI" type="CanvasLayer"]
 follow_viewport_enabled = true
@@ -37,67 +18,6 @@ grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_filter = 1
-
-[node name="ColorRect" type="ColorRect" parent="Control"]
-layout_mode = 0
-offset_right = 1913.0
-offset_bottom = 1080.0
-
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 25.0
-offset_top = 141.0
-offset_right = 237.0
-offset_bottom = 189.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Inbox 0"
-script = ExtResource("2_7ut8k")
-
-[node name="Minimize" type="Button" parent="Control"]
-offset_left = 1749.0
-offset_top = 23.0
-offset_right = 1785.0
-offset_bottom = 59.0
-theme_override_colors/icon_normal_color = Color(0.94902, 0, 0, 1)
-theme_override_constants/icon_max_width = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_xobhb")
-icon = ExtResource("2_1gi5w")
-icon_alignment = 1
-
-[node name="Window" type="Button" parent="Control"]
-offset_left = 1805.0
-offset_top = 23.0
-offset_right = 1841.0
-offset_bottom = 59.0
-theme_override_colors/icon_normal_color = Color(0.94902, 0, 0, 1)
-theme_override_constants/icon_max_width = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_xobhb")
-icon = ExtResource("2_1gi5w")
-icon_alignment = 1
-
-[node name="Close" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 1858.0
-offset_top = 23.0
-offset_right = 1894.0
-offset_bottom = 59.0
-theme_override_colors/icon_normal_color = Color(0.94902, 0, 0, 1)
-theme_override_constants/icon_max_width = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_xobhb")
-disabled = true
-icon = ExtResource("2_0xw04")
-icon_alignment = 1
-
-[node name="Button" type="Button" parent="Control"]
-layout_mode = 2
-offset_top = 1019.0
-offset_right = 203.0
-offset_bottom = 1080.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_gwywt")
-theme_override_styles/normal = SubResource("StyleBoxFlat_iv2ce")
-text = "START"
-script = ExtResource("3_vmeds")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 1
@@ -136,22 +56,8 @@ theme_override_font_sizes/font_size = 20
 text = "test text"
 horizontal_alignment = 1
 
-[node name="ItemList" type="ItemList" parent="Control"]
-layout_mode = 0
-offset_left = 304.0
-offset_top = 137.0
-offset_right = 1913.0
-offset_bottom = 908.0
-theme_override_colors/font_color = Color(0.129412, 0.129412, 0.137255, 1)
-theme_override_colors/font_hovered_color = Color(0.537255, 1, 0.505882, 1)
-theme_override_colors/font_selected_color = Color(0, 0.788235, 0, 1)
-theme_override_constants/v_separation = 12
-theme_override_fonts/font = ExtResource("5_gwywt")
-theme_override_font_sizes/font_size = 18
-theme_override_styles/panel = SubResource("StyleBoxFlat_q6m64")
-item_count = 2
-item_0/text = "this is an item"
-item_1/text = "this is another item1"
-script = ExtResource("7_cdu2a")
-
-[connection signal="pressed" from="Control/Button" to="Control/Button" method="_on_pressed"]
+[node name="Emails" parent="Control" instance=ExtResource("2_rakp0")]
+visible = false
+layout_mode = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
