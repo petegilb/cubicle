@@ -3,11 +3,15 @@ class_name CubicleMain
 
 const DAY_LENGTH_IN_SECONDS = 60*8
 
+# This is the player's approval rating that will signify if they've won or lost
+var approval_rating = 100
+
 @onready var day_timer = $DayTimer
 @onready var second_timer = $SecondTimer
 @onready var ui = $UI
 
 signal day_clock_updated(new_time)
+signal approval_updated(new_value)
 
 func _ready():
 	# Temporary limit to 60 fps to stop physics jitter
@@ -15,7 +19,6 @@ func _ready():
 	start_game()
 
 func _process(_delta):
-	get_clock_time()
 	pass
 
 func start_game():
