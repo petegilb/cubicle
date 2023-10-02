@@ -11,7 +11,7 @@ script = ExtResource("1_3gw8r")
 [node name="CubicleMap" parent="." instance=ExtResource("1_iimd0")]
 
 [node name="fp_player" parent="." instance=ExtResource("2_rx6hw")]
-transform = Transform3D(-0.648186, 0, -0.761482, 0, 1, 0, 0.761482, 0, -0.648186, 2.58469, 1, 0.844279)
+transform = Transform3D(-0.322547, 0.000374878, 0.946554, 0.000332259, 1, -0.000282825, -0.946553, 0.000223277, -0.322547, 8.69752, 1, 8.05889)
 
 [node name="UI" parent="." instance=ExtResource("3_qm3aj")]
 

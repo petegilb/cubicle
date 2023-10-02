@@ -1,7 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4nyunsu7oe3p"]
+[gd_scene load_steps=11 format=3 uid="uid://c4nyunsu7oe3p"]
 
+[ext_resource type="PackedScene" uid="uid://bfvbcwhl12xxu" path="res://scenes/cubicle_map.tscn" id="1_j2g4j"]
 [ext_resource type="Script" path="res://scripts/Interactables/InteractableCube.gd" id="2_3a5o7"]
-[ext_resource type="PackedScene" uid="uid://cbqcaelekbdfk" path="res://scenes/cubicle_map_blendimport.tscn" id="2_h6b3l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vf1d5"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -13,14 +13,9 @@ sky_material = SubResource("ProceduralSkyMaterial_vf1d5")
 [sub_resource type="Environment" id="Environment_phwdj"]
 background_mode = 2
 sky = SubResource("Sky_n5mxe")
-tonemap_mode = 2
+tonemap_mode = 3
+tonemap_white = 1.23
 glow_enabled = true
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_34edg"]
-size = Vector2(20, 20)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j71ia"]
-data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xdq2n"]
 
@@ -47,17 +42,10 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 light_color = Color(1, 1, 0.741176, 1)
 shadow_enabled = true
 
-[node name="Floor" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("PlaneMesh_34edg")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_j71ia")
+[node name="cubicle_map" parent="." instance=ExtResource("1_j2g4j")]
 
 [node name="Cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(4.19096, 0, 0, 0, 1, 0, 0, 0, 10.3395, -9.64938, 1.92896, 0)
+transform = Transform3D(4.19096, 0, 0, 0, 1, 0, 0, 0, 10.3395, -16.9432, 1.92896, 0)
 mesh = SubResource("BoxMesh_xdq2n")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube"]
@@ -66,7 +54,7 @@ mesh = SubResource("BoxMesh_xdq2n")
 shape = SubResource("ConcavePolygonShape3D_sevms")
 
 [node name="InteractableCube" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51536, 0.661328, 7.19242)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.51536, 0.661328, 15.0274)
 mesh = SubResource("BoxMesh_fgt2o")
 surface_material_override/0 = SubResource("StandardMaterial3D_chbkx")
 script = ExtResource("2_3a5o7")
@@ -76,4 +64,155 @@ script = ExtResource("2_3a5o7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCube/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_wmdpq")
 
-[node name="cubicle_map" parent="." instance=ExtResource("2_h6b3l")]
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.28004, 2.74485, 0.891073)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D13" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.27958, 2.72129, -6.22252)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D14" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.27958, 2.72129, -2.58284)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D15" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5652, 2.72467, -2.34472)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D16" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26254, 2.72467, -6.16209)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D17" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.52699, 2.72467, -6.16209)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2796, 2.74485, 4.35345)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.2796, 2.74485, 7.90827)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35497, 2.74485, 7.90827)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45684, 2.74485, 7.90827)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D18" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45684, 2.74485, 0.957583)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.41676, 2.74485, 7.90827)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9724, 2.74485, 4.30879)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D10" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9724, 2.74485, 1.05286)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D11" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9724, 2.74485, -2.37161)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D12" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9724, 2.74485, -6.01967)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13839, 2.74485, 0.891073)
+light_energy = 0.778
+light_specular = 0.0
+light_bake_mode = 1
+shadow_enabled = true
+omni_range = 6.3
+omni_attenuation = 0.63728
